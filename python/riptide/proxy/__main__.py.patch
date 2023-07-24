@@ -1,0 +1,19 @@
+--- __main__.py	2023-07-17 10:06:16.000000000 +0200
++++ __main__.py	2023-07-24 22:24:07.159906392 +0200
+@@ -1,6 +1,6 @@
+ import click
+ import logging
+-import pkg_resources
++from importlib.metadata import version
+ from click import ClickException, echo
+ from tempfile import TemporaryDirectory
+ 
+@@ -20,7 +20,7 @@
+ 
+ def print_version():
+     echo(f"riptide_lib: {get_riptide_version_raw()}")
+-    echo(f"riptide_proxy: {pkg_resources.get_distribution('riptide_proxy').version}")
++    echo(f"riptide_proxy: {version('riptide_proxy')}")
+ 
+ 
+ @click.command(name="riptide_proxy")

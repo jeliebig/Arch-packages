@@ -1,0 +1,28 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-riptide-db-mysql
+_name=${pkgname#python-}
+pkgver="0.8.0"
+pkgrel=1
+pkgdesc="Tool to manage development environments for web applications using containers - MySQL Database Drvier"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=('riptide')
+depends=('python-riptide-lib' 'python-schema')
+makedepends=('python-setuptools')
+checkdepends=()
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
+sha256sums=('1b060103110ba8ef002c9c4d918cc0a8cefc38980f87fa4a04cd150775da879a')
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python setup.py build
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python setup.py install --root="${pkgdir}" --optimize=1
+}

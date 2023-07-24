@@ -1,0 +1,43 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-configcrunch
+_name=${pkgname#python-}
+pkgver="1.0.4"
+pkgrel=1
+pkgdesc="Configuration parser based on YAML-Files with support for variables, overlaying and hierarchies"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=()
+depends=('python-schema')
+makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools' 'python-setuptools-rust')
+checkdepends=('python-pytest' 'python-pyyaml')
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        'setup.py.patch')
+sha256sums=('7300742f2133f50a5d0a499c317b00eefcc68158f18334d243dc16ac31ee6558'
+            '87c64d0a5c5e7018806c15765a77a14d2bdad7f47450a343692b804220029e86')
+
+prepare() {
+    cd "${_name}-${pkgver}"
+
+    patch ./setup.py ../setup.py.patch
+}
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python -m build --wheel --no-isolation
+}
+
+check(){
+    local python_version=$(python -c 'import sys; print("".join(map(str, sys.version_info[:2])))')
+    cd "${srcdir}/${_name}-${pkgver}/build/lib.linux-${CARCH}-cpython-${python_version}"
+    
+    pytest
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python -m installer --destdir="${pkgdir}" dist/*.whl
+}

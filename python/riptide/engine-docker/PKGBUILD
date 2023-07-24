@@ -1,0 +1,36 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-riptide-engine-docker
+_name=${pkgname#python-}
+pkgver="0.8.0"
+pkgrel=1
+pkgdesc="Tool to manage development environments for web applications using containers - Docker Implementation"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=('riptide')
+depends=('python-riptide-lib' 'python-docker')
+makedepends=('python-setuptools')
+checkdepends=()
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        'assets.py.patch')
+sha256sums=('663355eacc5248ad3b7c964c30908a2813772b0081f0c415e685bdd951b282c2'
+            '5a6d5319efa6f90cba9c0b8452f494bccf2075ebe4b3027d70438e4a557975e8')
+
+prepare() {
+    cd "${_name}-${pkgver}"
+
+    patch "${_name//-/_}/assets.py" ../assets.py.patch
+}
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python setup.py build
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python setup.py install --root="${pkgdir}" --optimize=1
+}

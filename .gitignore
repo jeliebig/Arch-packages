@@ -2,6 +2,7 @@
 src/
 pkg/
 *.tar.zst
+*.tar.gz
 
 # Git files and directories
 branches/

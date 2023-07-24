@@ -1,0 +1,48 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-riptide-lib
+_name=${pkgname#python-}
+pkgver="0.8.0"
+pkgrel=1
+pkgdesc="Tool to manage development environments for web applications using containers - Library Package"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=('riptide')
+depends=('python-pyyaml' 'python-schema' 'python-configcrunch' 'python-appdirs' 'python-janus' 'python-psutil' 'python-gitpython' 'python-hosts' 'python-dotenv')
+makedepends=('python-setuptools')
+checkdepends=()
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        'util.py.patch'
+        'files.py.patch'
+        'db_driver_for_service.py.patch'
+        'engine-loader.py.patch'
+        'plugin-loader.py.patch')
+sha256sums=('c53b194f660170de85927b3a3432fda55d40fe0429eb9d68c2adc96a1e0ad87e'
+            '5e6ef66748f8888b1894ad49908fca7dcf06845080d7bdf5c128262a70937fa5'
+            '0cb93e83473de76a3207de79a42b733fa94a7ec279427ba1671993b3c642a184'
+            'f9511403cbb6c7efe3c3dabe68f624a0e5c2817088f9ac8b1fac541d86f18c77'
+            'aac1f66e399ced8e25655a391f193e8480399bb38d539e869ce5cd03020fb807'
+            '5a2d0825e979b2aedbfef5effe8c32a32d944aab47512be0f84b7ab686af3ff4')
+
+prepare() {
+    cd "${_name}-${pkgver}"
+
+    patch "riptide/util.py" ../util.py.patch
+    patch "riptide/db/driver/db_driver_for_service.py" ../db_driver_for_service.py.patch
+    patch "riptide/engine/loader.py" ../engine-loader.py.patch
+    patch "riptide/plugin/loader.py" ../plugin-loader.py.patch
+    patch "riptide/config/files.py" ../files.py.patch
+}
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python setup.py build
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python setup.py install --root="${pkgdir}" --optimize=1
+}

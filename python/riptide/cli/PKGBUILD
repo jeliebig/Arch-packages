@@ -1,0 +1,42 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-riptide-cli
+_name=${pkgname#python-}
+pkgver="0.8.0"
+pkgrel=1
+pkgdesc="Tool to manage development environments for web applications using containers - CLI-Application"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=('riptide')
+depends=('python-click' 'python-colorama' 'python-click-help-colors' 'python-tqdm' 'python-riptide-lib')
+makedepends=('python-setuptools')
+checkdepends=()
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        '__main__.py.patch'
+        'self_updater.py.patch'
+        'update_checker.py.patch')
+sha256sums=('e237ba4bff451992f9490e32bf0e07c8a77c5d93c00c4fe180ed99ea6cc964d6'
+            'a767c6826d3a10045e9c8c820aa34e98d4e9237dd375987ca0301a155b4c9f08'
+            'bd65f6fbd97487c9c689c8a26f6c690c991b4ad38c7e281bdc5b12d15e5b89ce'
+            '0aee8147423582d6c0bdd7f6ce988f7491c667115705d7134bd83a39789ace5f')
+
+prepare() {
+    cd "${_name}-${pkgver}"
+
+    patch "${_name//-/_}/__main__.py" ../__main__.py.patch
+    patch "${_name//-/_}/self_updater.py" ../self_updater.py.patch
+    patch "${_name//-/_}/update_checker.py" ../update_checker.py.patch
+}
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python setup.py build
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python setup.py install --root="${pkgdir}" --optimize=1
+}

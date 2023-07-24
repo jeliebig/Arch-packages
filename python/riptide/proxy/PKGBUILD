@@ -1,0 +1,39 @@
+# Maintainer: Julian Liebig <julian.liebig@tudock.de>
+
+pkgname=python-riptide-proxy
+_name=${pkgname#python-}
+pkgver="0.8.0"
+pkgrel=1
+pkgdesc="Tool to manage development environments for web applications using containers - HTTP and WebSocket Reverse Proxy Server"
+arch=('any')
+url="https://github.com/theCapypara/${_name}"
+license=('MIT')
+groups=('riptide')
+depends=('python-riptide-lib' 'python-tornado' 'python-click' 'python-prctl' 'python-certauth')
+makedepends=('python-setuptools')
+checkdepends=()
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        '__main__.py.patch'
+        'resources.py.patch')
+sha256sums=('6fd460a022c0999579c33ed75c090eb1d445482b4add121e7253a1a9bd7678f8'
+            '04ff1942e9176fdc6da2cbbf8632971c4dc34032f8d3b66ba12f13e18d476a8c'
+            '6761d5e1bc2cb3abf1611b7b6881c8d26463e87aaac31cf83b61c8aabeef7d78')
+
+prepare() {
+    cd "${_name}-${pkgver}"
+
+    patch "${_name//-/_}/__main__.py" ../__main__.py.patch
+    patch "${_name//-/_}/resources.py" ../resources.py.patch
+}
+
+build() {
+    cd "${_name}-${pkgver}"
+
+    python setup.py build
+}
+
+package() {
+    cd "${_name}-${pkgver}"
+    
+    python setup.py install --root="${pkgdir}" --optimize=1
+}
