@@ -1,0 +1,15 @@
+# makepkg build files and directories
+src/
+pkg/
+*.tar.zst
+
+# Git files and directories
+branches/
+hooks/
+info/
+objects/
+refs/
+config
+description
+HEAD
+packed-refs
