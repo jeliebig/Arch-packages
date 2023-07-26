@@ -15,7 +15,7 @@ checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
         'assets.py.patch')
 sha256sums=('663355eacc5248ad3b7c964c30908a2813772b0081f0c415e685bdd951b282c2'
-            '5a6d5319efa6f90cba9c0b8452f494bccf2075ebe4b3027d70438e4a557975e8')
+            '30a6a4e4016b90fa600bec9bc121d0fdd860f8f4ad39bc29f3eb2afaa3aecdc5')
 
 prepare() {
     cd "${_name}-${pkgver}"
