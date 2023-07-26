@@ -16,10 +16,10 @@
 -        if pkg.key.startswith('riptide-'):
 -            print(f"{pkg.key:>30}: {pkg.version}")
 +    pkgs = packages_distributions()
-+    if 'riptide' not in pks.keys():
++    if 'riptide' not in pkgs.keys():
 +        print("Couldn't find riptide module in top-level modules:", pkgs.keys())
 +        exit(1)
-+    for pkg in packages_distributions()['riptide']:
++    for pkg in pkgs['riptide']:
 +            print(f"{pkg:>30}: {version(pkg)}")
  
  
