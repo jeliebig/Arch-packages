@@ -35,7 +35,7 @@
 -                        versions[pkg.key] = str(upstream_version)
 -            except Exception:
 -                pass
-+    for pkg_name in packages_distributions()['riptide'].values():
++    for pkg_name in packages_distributions()['riptide']:
 +        try:
 +            pkg = distribution(pkg_name)
 +            repo_url = _get_repo_url_for_egg(pkg)

@@ -19,7 +19,7 @@ source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
 sha256sums=('e237ba4bff451992f9490e32bf0e07c8a77c5d93c00c4fe180ed99ea6cc964d6'
             '943c63a7cdaa0c08ea90eb5a01607ca3ec7d0863a8416c753b1586f12d0e8f1e'
             'bd65f6fbd97487c9c689c8a26f6c690c991b4ad38c7e281bdc5b12d15e5b89ce'
-            '0aee8147423582d6c0bdd7f6ce988f7491c667115705d7134bd83a39789ace5f')
+            '6030b4a2794be5ffb66681be62d07dd6c078215dae2020610fec997d8ea7ccdb')
 
 prepare() {
     cd "${_name}-${pkgver}"
