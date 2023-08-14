@@ -31,7 +31,7 @@ echo "Installing packages..."
 
 for package in "${PACKAGES[@]}"; do
     pushd "${package}"
-        makepkg -sic --noconfirm
+        makepkg -Cfsic --noconfirm
     popd
 done
 
