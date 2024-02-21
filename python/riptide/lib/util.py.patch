@@ -12,4 +12,4 @@
  
  def get_riptide_version_raw():
 -    return pkg_resources.get_distribution("riptide_lib").version
-+    return version("riptide")
++    return version("riptide-lib")

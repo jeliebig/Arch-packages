@@ -19,7 +19,7 @@ source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
         'engine-loader.py.patch'
         'plugin-loader.py.patch')
 sha256sums=('c53b194f660170de85927b3a3432fda55d40fe0429eb9d68c2adc96a1e0ad87e'
-            '5e6ef66748f8888b1894ad49908fca7dcf06845080d7bdf5c128262a70937fa5'
+            'a0a3841ad5522b1b69fbe8eb147277d08fca21222caa3fa0c6ae3b1edcb7d66f'
             '0cb93e83473de76a3207de79a42b733fa94a7ec279427ba1671993b3c642a184'
             'f9511403cbb6c7efe3c3dabe68f624a0e5c2817088f9ac8b1fac541d86f18c77'
             'aac1f66e399ced8e25655a391f193e8480399bb38d539e869ce5cd03020fb807'
