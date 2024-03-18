@@ -2,7 +2,7 @@
 
 pkgname=python-configcrunch
 _name=${pkgname#python-}
-pkgver="1.0.4"
+pkgver="1.0.5"
 pkgrel=1
 pkgdesc="Configuration parser based on YAML-Files with support for variables, overlaying and hierarchies"
 arch=('any')
@@ -12,16 +12,8 @@ groups=()
 depends=('python-schema')
 makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools' 'python-setuptools-rust')
 checkdepends=('python-pytest' 'python-pyyaml')
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
-        'setup.py.patch')
-sha256sums=('7300742f2133f50a5d0a499c317b00eefcc68158f18334d243dc16ac31ee6558'
-            '87c64d0a5c5e7018806c15765a77a14d2bdad7f47450a343692b804220029e86')
-
-prepare() {
-    cd "${_name}-${pkgver}"
-
-    patch ./setup.py ../setup.py.patch
-}
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
+sha256sums=('9edd9a24e0eb0f67e7c73d2f9d8b84ba2cbb9a4f0eccf54d26af55b5571b7d7f')
 
 build() {
     cd "${_name}-${pkgver}"
@@ -32,6 +24,8 @@ build() {
 check(){
     local python_version=$(python -c 'import sys; print("".join(map(str, sys.version_info[:2])))')
     cd "${srcdir}/${_name}-${pkgver}/build/lib.linux-${CARCH}-cpython-${python_version}"
+
+    cp -a "${srcdir}/${_name}-${pkgver}/${_name}/tests/fixtures" "./${_name}/tests/"
     
     pytest
 }
