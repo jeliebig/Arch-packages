@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-plugin-php-xdebug
 _name=${pkgname#python-}
-pkgver="0.8.0"
+pkgver="0.8.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - PHP Xdebug integration"
 arch=('any')
@@ -13,7 +13,7 @@ depends=('python-riptide-lib' 'python-riptide-cli' 'python-click')
 makedepends=('python-setuptools')
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('0732dda3a75e99259c58e5f762b8994d29c79d8e03f6ba74db5cde1d594e58bb')
+sha256sums=('2c9837714a3b299530bd3c48bd78a59583498b1a024f627427e47e0f3d79485a')
 
 build() {
     cd "${_name}-${pkgver}"
