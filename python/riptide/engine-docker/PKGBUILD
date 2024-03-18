@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-engine-docker
 _name=${pkgname#python-}
-pkgver="0.8.0"
+pkgver="0.8.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - Docker Implementation"
 arch=('any')
@@ -12,16 +12,8 @@ groups=('riptide')
 depends=('python-riptide-lib' 'python-docker')
 makedepends=('python-setuptools')
 checkdepends=()
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
-        'assets.py.patch')
-sha256sums=('663355eacc5248ad3b7c964c30908a2813772b0081f0c415e685bdd951b282c2'
-            '30a6a4e4016b90fa600bec9bc121d0fdd860f8f4ad39bc29f3eb2afaa3aecdc5')
-
-prepare() {
-    cd "${_name}-${pkgver}"
-
-    patch "${_name//-/_}/assets.py" ../assets.py.patch
-}
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
+sha256sums=('40c6aec07b6225bb167a4203394c36cd24be580bf21286e712f238d982d32ecc')
 
 build() {
     cd "${_name}-${pkgver}"
