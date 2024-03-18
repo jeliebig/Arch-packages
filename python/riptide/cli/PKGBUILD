@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-cli
 _name=${pkgname#python-}
-pkgver="0.8.0"
+pkgver="0.8.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - CLI-Application"
 arch=('any')
@@ -12,22 +12,8 @@ groups=('riptide')
 depends=('python-click' 'python-colorama' 'python-click-help-colors' 'python-tqdm' 'python-riptide-lib')
 makedepends=('python-setuptools')
 checkdepends=()
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
-        '__main__.py.patch'
-        'self_updater.py.patch'
-        'update_checker.py.patch')
-sha256sums=('e237ba4bff451992f9490e32bf0e07c8a77c5d93c00c4fe180ed99ea6cc964d6'
-            '943c63a7cdaa0c08ea90eb5a01607ca3ec7d0863a8416c753b1586f12d0e8f1e'
-            'bd65f6fbd97487c9c689c8a26f6c690c991b4ad38c7e281bdc5b12d15e5b89ce'
-            '6030b4a2794be5ffb66681be62d07dd6c078215dae2020610fec997d8ea7ccdb')
-
-prepare() {
-    cd "${_name}-${pkgver}"
-
-    patch "${_name//-/_}/__main__.py" ../__main__.py.patch
-    patch "${_name//-/_}/self_updater.py" ../self_updater.py.patch
-    patch "${_name//-/_}/update_checker.py" ../update_checker.py.patch
-}
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
+sha256sums=('2cdefd923b37e7718c523157524c5227368de418d6c26e27c0c79f19a9e9b4a8')
 
 build() {
     cd "${_name}-${pkgver}"
