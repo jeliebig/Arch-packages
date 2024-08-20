@@ -1,0 +1,24 @@
+# arg 1:  the new package version
+post_install() {
+    systemctl daemon-reload
+    systemctl enable aksusbd hasplmd
+    systemctl start aksusbd hasplmd
+}
+
+# arg 1:  the new package version
+# arg 2:  the old package version
+post_upgrade() {
+    systemctl daemon-reload
+    systemctl restart aksusbd hasplmd
+}
+
+# arg 1:  the old package version
+pre_remove() {
+    systemctl stop aksusbd hasplmd
+    systemctl disable aksusbd hasplmd
+}
+
+# arg 1:  the old package version
+post_remove() {
+    systemctl daemon-reload
+}

@@ -1,0 +1,52 @@
+# Maintainer: Julian Liebig <julian.liebig@imacs-gmbh.de>
+pkgname=aksusbd-bin
+pkgver=9.15_1
+pkgrel=1
+pkgdesc="Sentinel LDK runtime supporting Sentinel, Sentinel HL, HASP 4, and Hardlock keys."
+arch=('x86_64')
+url="https://cpl.thalesgroup.com/software-monetization/license-development-kit-ldk"
+license=('proprietary')
+provides=(aksusbd)
+conflicts=(aksusbd)
+#backup=('etc/hasplm/hasplm.ini')
+install='.INSTALL'
+# Manually download "Sentinel® LDK Runtime Environment DEB Installer for Linux"
+# Extract the tar file and copy the .deb file we need
+source=("${pkgname:0:-4}_${pkgver//_/-}_amd64.deb")
+noextract=("${pkgname:0:-4}_${pkgver//_/-}_amd64.deb")
+sha256sums=('dbfddbe2298e37c46565ff2ba723832a2e400305bc442328a88ec0ee06c7e3e9')
+
+prepare() {
+	if [ ! -f "data.tar.gz" ]; then
+		ar x "${pkgname:0:-4}_${pkgver//_/-}_amd64.deb"
+	fi
+
+	if [ ! -d "$pkgname-$pkgver" ]; then
+		mkdir "$pkgname-$pkgver"
+		cd "$pkgname-$pkgver"
+		tar -xzf ../data.tar.gz
+	fi
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+
+	mv usr/sbin usr/bin
+	sed -i -E 's#/usr/sbin/#/usr/bin/#g' etc/udev/rules.d/80-hasp.rules var/hasplm/init/*
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+
+	mkdir -p "$pkgdir/usr/share/doc/hasplm" "$pkgdir/var/lib" "$pkgdir/etc/systemd/system"
+
+	cp -a ./* "$pkgdir/"
+
+	mv "$pkgdir/etc/hasplm/help" "$pkgdir/usr/share/doc/hasplm/"
+	ln -s "/usr/share/doc/hasplm/help" "$pkgdir/etc/hasplm/help"
+
+	mv "$pkgdir/var/hasplm" "$pkgdir/var/lib/"
+
+    ln -s "/var/lib/hasplm/init/aksusbd_${CARCH}.service" "$pkgdir/etc/systemd/system/aksusbd.service"
+    ln -s "/var/lib/hasplm/init/hasplmd_${CARCH}.service" "$pkgdir/etc/systemd/system/hasplmd.service"
+}
