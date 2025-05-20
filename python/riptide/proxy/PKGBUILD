@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-proxy
 _name=${pkgname#python-}
-pkgver="0.8.1"
+pkgver="0.9.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - HTTP and WebSocket Reverse Proxy Server"
 arch=('any')
@@ -10,19 +10,25 @@ url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
 depends=('python-riptide-lib' 'python-tornado' 'python-click' 'python-prctl' 'python-certauth')
-makedepends=('python-setuptools')
+makedepends=(python-build python-installer python-wheel)
 checkdepends=()
-source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('c1ccebb2c0bf6f1b226bd15a7978be33a80ba3facd5f54eb83bfbd9890f7bda5')
+install=$pkgname.install
+source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
+        'riptide@.service')
+sha256sums=('1c24e29a528fe244ffb63b4b5526c97b02e41f468824cf6f86abc9c255b5fbce'
+            'cc13d0d41b8d8ffe2348d96db171402535d4be8f0f2dc5dadcc33f58f2bcd3b2')
 
 build() {
     cd "${_name}-${pkgver}"
 
-    python setup.py build
+    python -m build --wheel --no-isolation
 }
 
 package() {
     cd "${_name}-${pkgver}"
     
-    python setup.py install --root="${pkgdir}" --optimize=1
+    python -m installer --destdir="$pkgdir" dist/*.whl
+    
+    mkdir -p "$pkgdir/etc/systemd/system"
+    cp ../riptide@.service "$pkgdir/etc/systemd/system/"
 }

@@ -15,7 +15,7 @@ no_root=0
 
 echo "Checking AUR dependencies..."
 
-${PACMAN_BIN} -Qq "${AUR_PACKAGES[@]}" | grep "error" > /dev/null 2>&1 || not_installed=$?
+${PACMAN_BIN} -Qq "${AUR_PACKAGES[@]}" 2>&1 | grep "error" > /dev/null 2>&1 || not_installed=$?
 
 if [ ${not_installed} -eq 0 ]; then
     ${PACMAN_BIN} -S | grep "root" > /dev/null 2>&1 || no_root=$?
@@ -30,9 +30,9 @@ fi
 echo "Installing packages..."
 
 for package in "${PACKAGES[@]}"; do
-    pushd "${package}"
+    pushd "${package}" > /dev/null
         makepkg -Cfsic --noconfirm
-    popd
+    popd > /dev/null
 done
 
 echo "Done!"

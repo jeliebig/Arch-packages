@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-engine-docker
 _name=${pkgname#python-}
-pkgver="0.8.1"
+pkgver="0.9.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - Docker Implementation"
 arch=('any')
@@ -10,19 +10,19 @@ url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
 depends=('python-riptide-lib' 'python-docker')
-makedepends=('python-setuptools')
+makedepends=(python-build python-installer python-wheel)
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('40c6aec07b6225bb167a4203394c36cd24be580bf21286e712f238d982d32ecc')
+sha256sums=('5b255e691184af18688cb26f99c9cf9b3dcb2f8c76d9934215bdcf229a9dc57c')
 
 build() {
     cd "${_name}-${pkgver}"
 
-    python setup.py build
+    python -m build --wheel --no-isolation
 }
 
 package() {
     cd "${_name}-${pkgver}"
     
-    python setup.py install --root="${pkgdir}" --optimize=1
+    python -m installer --destdir="$pkgdir" dist/*.whl
 }

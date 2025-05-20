@@ -1,0 +1,9 @@
+[Unit]
+Description=Riptide
+
+[Service]
+ExecStart=/usr/bin/riptide_proxy --user=%i
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

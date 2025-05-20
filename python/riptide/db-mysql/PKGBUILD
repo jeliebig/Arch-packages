@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-db-mysql
 _name=${pkgname#python-}
-pkgver="0.8.1"
+pkgver="0.9.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - MySQL Database Drvier"
 arch=('any')
@@ -13,16 +13,16 @@ depends=('python-riptide-lib' 'python-schema')
 makedepends=('python-setuptools')
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('8d1ebecbbaf62103da6d8a57174d8893ae5e8d7402af503a9971b03ca92c3aeb')
+sha256sums=('81794c8788d3505d7cb29d39f5fa847e5bcbbb33bc32d99f31667ddc2958c854')
 
 build() {
     cd "${_name}-${pkgver}"
 
-    python setup.py build
+    python -m build --wheel --no-isolation
 }
 
 package() {
     cd "${_name}-${pkgver}"
     
-    python setup.py install --root="${pkgdir}" --optimize=1
+    python -m installer --destdir="$pkgdir" dist/*.whl
 }

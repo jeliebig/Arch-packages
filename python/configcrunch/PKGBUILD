@@ -2,7 +2,7 @@
 
 pkgname=python-configcrunch
 _name=${pkgname#python-}
-pkgver="1.0.5"
+pkgver="1.1.0"
 pkgrel=1
 pkgdesc="Configuration parser based on YAML-Files with support for variables, overlaying and hierarchies"
 arch=('any')
@@ -13,7 +13,7 @@ depends=('python-schema')
 makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools' 'python-setuptools-rust')
 checkdepends=('python-pytest' 'python-pyyaml')
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('9edd9a24e0eb0f67e7c73d2f9d8b84ba2cbb9a4f0eccf54d26af55b5571b7d7f')
+sha256sums=('4bb9ccb7aa4a3134817e725e6801a0761d58521d7076a71f8447fad6e59599b5')
 
 build() {
     cd "${_name}-${pkgver}"
@@ -22,10 +22,7 @@ build() {
 }
 
 check(){
-    local python_version=$(python -c 'import sys; print("".join(map(str, sys.version_info[:2])))')
-    cd "${srcdir}/${_name}-${pkgver}/build/lib.linux-${CARCH}-cpython-${python_version}"
-
-    cp -a "${srcdir}/${_name}-${pkgver}/${_name}/tests/fixtures" "./${_name}/tests/"
+    cd "${_name}-${pkgver}/tests"
     
     pytest
 }
