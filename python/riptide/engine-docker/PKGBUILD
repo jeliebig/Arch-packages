@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-engine-docker
 _name=${pkgname#python-}
-pkgver="0.9.1"
+pkgver="0.9.2"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - Docker Implementation"
 arch=('any')
@@ -13,7 +13,7 @@ depends=('python-riptide-lib' 'python-docker')
 makedepends=(python-build python-installer python-wheel)
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('5b255e691184af18688cb26f99c9cf9b3dcb2f8c76d9934215bdcf229a9dc57c')
+sha256sums=('ad09f7426f52e07eacb81a6ea4f2a09c83d72b6f3647fe988edb9864c831290f')
 
 build() {
     cd "${_name}-${pkgver}"
