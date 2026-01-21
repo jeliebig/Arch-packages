@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-proxy
 _name=${pkgname#python-}
-pkgver="0.9.1"
+pkgver="0.10.0"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - HTTP and WebSocket Reverse Proxy Server"
 arch=('any')
@@ -10,12 +10,12 @@ url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
 depends=('python-riptide-lib' 'python-tornado' 'python-click' 'python-prctl' 'python-certauth')
-makedepends=(python-build python-installer python-wheel)
+makedepends=(python-build python-installer python-wheel python-setuptools)
 checkdepends=()
 install=$pkgname.install
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz
         'riptide@.service')
-sha256sums=('1c24e29a528fe244ffb63b4b5526c97b02e41f468824cf6f86abc9c255b5fbce'
+sha256sums=('8aae8156edbee8fa01f9ceb9d69efef4cbd624c089adb9e90ffccef46063dc89'
             'cc13d0d41b8d8ffe2348d96db171402535d4be8f0f2dc5dadcc33f58f2bcd3b2')
 
 build() {

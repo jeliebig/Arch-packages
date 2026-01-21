@@ -2,19 +2,19 @@
 
 pkgname=python-riptide-cli
 _name=${pkgname#python-}
-pkgver="0.9.0"
+pkgver="0.10.0"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - CLI-Application"
 arch=('any')
 url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
-depends=('python-click' 'python-colorama' 'python-click-help-colors' 'python-tqdm' 'python-riptide-lib')
-makedepends=(python-build python-installer python-wheel)
+depends=('python-click' 'python-rich' 'python-click-help-colors' 'python-setproctitle' 'python-riptide-lib')
+makedepends=(python-build python-installer python-wheel python-setuptools)
 checkdepends=()
 install=$pkgname.install
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('0ff57d7ab8e051a85f0763780434388c778c24ad407f4a0f6c68129f66270759')
+sha256sums=('2f0e8f24ccc161e405b9b35ccccd4dbb9700ed291eb9f785ab12c081d41f194a')
 
 build() {
     cd "${_name}-${pkgver}"

@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-plugin-php-xdebug
 _name=${pkgname#python-}
-pkgver="0.9.0"
+pkgver="0.10.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - PHP Xdebug integration"
 arch=('any')
@@ -10,10 +10,10 @@ url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
 depends=('python-riptide-lib' 'python-riptide-cli' 'python-click')
-makedepends=(python-build python-installer python-wheel)
+makedepends=(python-build python-installer python-wheel python-setuptools)
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('69736d6cc4fd8d7406f8b18bba70b92c20dae3dbdbecd910645e6f1cb1daabfb')
+sha256sums=('f6f778b71852587836baccc3bd13127757029b485b89c59e2be6b341b6948e89')
 
 build() {
     cd "${_name}-${pkgver}"

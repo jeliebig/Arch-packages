@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-lib
 _name=${pkgname#python-}
-pkgver="0.9.2"
+pkgver="0.10.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - Library Package"
 arch=('any')
@@ -10,10 +10,10 @@ url="https://github.com/theCapypara/${_name}"
 license=('MIT')
 groups=('riptide')
 depends=('python-pyyaml' 'python-schema' 'python-configcrunch' 'python-appdirs' 'python-janus' 'python-psutil' 'python-gitpython' 'python-hosts' 'python-dotenv')
-makedepends=(python-build python-installer python-wheel)
+makedepends=(python-build python-installer python-wheel python-setuptools)
 checkdepends=()
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('b9b483f8824c56c7dad723c8fc7dab5e43670d8ab61a5356f73f70fbb8c96c63')
+sha256sums=('6edaefccd3e45e87ab6988ef896e4ab085e97de3cf6a680d2a1a8a70b24860e8')
 
 build() {
     cd "${_name}-${pkgver}"
