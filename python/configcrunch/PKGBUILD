@@ -2,7 +2,7 @@
 
 pkgname=python-configcrunch
 _name=${pkgname#python-}
-pkgver="1.3.0"
+pkgver="2.1.1"
 pkgrel=1
 pkgdesc="Configuration parser based on YAML-Files with support for variables, overlaying and hierarchies"
 arch=('any')
@@ -13,7 +13,7 @@ depends=('python-schema')
 makedepends=('python-build' 'python-installer' 'python-wheel' 'python-setuptools' 'python-setuptools-rust')
 checkdepends=('python-pytest' 'python-pyyaml')
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('11f812f55f2b9b58ebab7b76697c0b5a264d538ac058069f505f2cd2acb18f94')
+sha256sums=('d54d647d84f832ef8cba8e67f06bee1e8e7cc94b9a8e663c18ca7bba37f9b608')
 
 build() {
     cd "${_name}-${pkgver}"
