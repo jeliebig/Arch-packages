@@ -2,7 +2,7 @@
 
 pkgname=python-riptide-cli
 _name=${pkgname#python-}
-pkgver="0.10.0"
+pkgver="0.10.1"
 pkgrel=1
 pkgdesc="Tool to manage development environments for web applications using containers - CLI-Application"
 arch=('any')
@@ -14,7 +14,7 @@ makedepends=(python-build python-installer python-wheel python-setuptools)
 checkdepends=()
 install=$pkgname.install
 source=(${pkgname}-${pkgver}.tar.gz::${url}/archive/refs/tags/${pkgver}.tar.gz)
-sha256sums=('2f0e8f24ccc161e405b9b35ccccd4dbb9700ed291eb9f785ab12c081d41f194a')
+sha256sums=('6f7d27d32f7a9fd31320854b73ba6965274b3a737132b03d0112ad3a041da0a6')
 
 build() {
     cd "${_name}-${pkgver}"
